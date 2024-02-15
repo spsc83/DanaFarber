@@ -27,8 +27,10 @@ python task1.py annotation <chromosome_coordinate_file> <annotation_file> <outpu
 python task2.py parse_coverage <coverage_file>
 # e.g.: python task2.py parse_coverage data/Example.hs_intervals.txt
 ```
-### Task3.1 - 
+### Task3.1 - Given a list of variant IDs, using Ensembl API retrieve information about alleles, locations, effects of variants in transcripts, and genes containing the transcripts.
 ```shell
 python task3.py query_rsids <rs_id1,rs_id2>
 # e.g.: python task3.py query_rsids rs56116432 or python task3.py query_rsids rs56116432,rs2332914
 ```
+### Task3.2 - Create a repository on GitHub and upload your code there. Make some minor changes to your code locally, and use a local Git installation to commit the changes to your GitHub repository.
+This is the repository.
