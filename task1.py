@@ -80,21 +80,30 @@ def parse_fasta(fasta_file: str, top_n: int = 10) -> None:
     :return: None
     """
     seq_dict = {}
-    with open(fasta_file, 'r') as fp:
+    with open(fasta_file, 'rb') as fp:
         while True:
-            name_line = fp.readline()
+            name_line = fp.readline().decode("utf-8")
             if not name_line:
                 break
-            seq = fp.readline()
-            if not seq:
-                print(f'Please check the format of the fastq file, requence_name={name_line.strip()}', file=sys.stderr)
-                exit()
+            seq = ''
+            while True:
+                sub_seq_line = fp.readline().decode("utf-8").strip()
+
+                seq += sub_seq_line
+                check_char = fp.read(1).decode("utf-8")
+                if check_char == '>':
+                    fp.seek(-1, 1)
+                    break
+                elif not check_char:
+                    break
+                else:
+                    fp.seek(-1, 1)
             if seq in seq_dict:
                 seq_dict[seq] += 1
             else:
                 seq_dict[seq] = 1
     ret_list = sorted(list(seq_dict.items()), key=lambda x: x[1], reverse=True)
-    for i in range(top_n):
+    for i in range(min(top_n, len(ret_list))):
         print(f"{ret_list[i][0].strip()}\t{ret_list[i][1]}")
 
 
@@ -254,7 +263,10 @@ def annotation(target_pos_file: str, annotation_file: str, output: str) -> None:
 #                     fp_out.write(f'{chrom}\t{pos}\t{anno.raw_data}')
 #     end = time.time()
 #     print(f'running time = {end - start}')
-
+def test():
+    with open('empty', 'r') as fp:
+        data = fp.read(1)
+        print(f'data={data} len={len(data)} type={type(data)}')
 
 if __name__ == '__main__':
     fire.Fire()
