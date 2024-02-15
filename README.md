@@ -34,3 +34,5 @@ python task3.py query_rsids <rs_id1,rs_id2>
 ```
 ### Task3.2 - Create a repository on GitHub and upload your code there. Make some minor changes to your code locally, and use a local Git installation to commit the changes to your GitHub repository.
 This is the repository.
+### Cloud computing and SQL
+[My answer](https://github.com/spsc83/DanaFarber/blob/main/cloud_computing_and_SQL.md)
